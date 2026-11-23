@@ -1,0 +1,6 @@
+{
+  "name": "recall-watch",
+  "private": true,
+  "type": "module",
+  "description": "Food recall tracker for a church soup kitchen"
+}

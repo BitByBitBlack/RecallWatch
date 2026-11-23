@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Recall Watch</title>
+  <meta name="description" content="Food recall tracker for anyone who cooks for other people">
+  <meta name="theme-color" content="#0f5e63">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Recall Watch">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <button class="back" id="backBtn" aria-label="Back" hidden>‹ Back</button>
+    <h1 id="title">Recall Watch</h1>
+  </header>
+  <main id="view" tabindex="-1"></main>
+  <nav class="tabs" aria-label="Main">
+    <a href="#alerts" data-tab="alerts"><span class="ico">🔔</span>Alerts<b class="badge" id="badge" hidden></b></a>
+    <a href="#shop" data-tab="shop"><span class="ico">🛒</span>Shopping</a>
+    <a href="#meals" data-tab="meals"><span class="ico">🍲</span>Meals</a>
+    <a href="#pantry" data-tab="pantry"><span class="ico">🥫</span>Pantry</a>
+    <a href="#more" data-tab="more"><span class="ico">☰</span>More</a>
+  </nav>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="modal" class="modal" hidden></div>
+  <script src="vendor/html5-qrcode.min.js" defer></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
