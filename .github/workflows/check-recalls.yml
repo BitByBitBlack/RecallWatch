@@ -1,0 +1,36 @@
+name: Check food recalls
+
+on:
+  schedule:
+    - cron: '23 * * * *'   # wakes every hour; the script checks only as often as you chose in the app
+  workflow_dispatch:       # "Run workflow" button, and the app's sync, run a check right away
+
+permissions:
+  contents: write
+
+concurrency:
+  group: recall-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Download recalls and send notifications
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          WATCHLIST: ${{ secrets.WATCHLIST }}
+        run: node scripts/check-recalls.mjs
+      - name: Save results
+        run: |
+          git config user.name "recall-watch-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "Update recall data"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push
